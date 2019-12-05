@@ -60,12 +60,18 @@ window.onbeforeunload = () => { // onbeforeunload 事件在即将离开当前页
     localStorage.setItem('x', string)
 }
 
-$(document).on('keypress', (e) => {
-    const { key } = e
-    console.log(e)
-    for (let i = 0; i < hashMap.length; i++) {
-        if (hashMap[i].logo.toLowerCase() === key) {
-            window.open(hashMap[i].url)
+inputFocus = () => { // 输入框聚焦时取消keypress监听
+    $(document).off('keypress')
+}
+
+inputBlur = () => { // 输入框失焦时恢复对keypress的监听
+    $(document).on('keypress', (e) => {
+        const { key } = e
+        console.log(e)
+        for (let i = 0; i < hashMap.length; i++) {
+            if (hashMap[i].logo.toLowerCase() === key) {
+                window.open(hashMap[i].url)
+            }
         }
-    }
-})
+    })
+}

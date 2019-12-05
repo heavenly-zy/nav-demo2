@@ -172,16 +172,24 @@ window.onbeforeunload = function () {
   localStorage.setItem('x', string);
 };
 
-$(document).on('keypress', function (e) {
-  var key = e.key;
-  console.log(e);
+inputFocus = function inputFocus() {
+  // 输入框聚焦时取消keypress监听
+  $(document).off('keypress');
+};
 
-  for (var i = 0; i < hashMap.length; i++) {
-    if (hashMap[i].logo.toLowerCase() === key) {
-      window.open(hashMap[i].url);
+inputBlur = function inputBlur() {
+  // 输入框失焦时恢复对keypress的监听
+  $(document).on('keypress', function (e) {
+    var key = e.key;
+    console.log(e);
+
+    for (var i = 0; i < hashMap.length; i++) {
+      if (hashMap[i].logo.toLowerCase() === key) {
+        window.open(hashMap[i].url);
+      }
     }
-  }
-});
+  });
+};
 },{}],"../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
